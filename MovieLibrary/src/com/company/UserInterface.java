@@ -7,8 +7,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import static com.company.FileUtils.*;
-import static com.company.Menus.adminMenuSwitch;
-import static com.company.Menus.userMenuSwitch;
+import static com.company.Menus.*;
 import static com.company.service.UserService.loginOrRegisterSwitch;
 
 public class UserInterface {
@@ -24,9 +23,12 @@ public class UserInterface {
      User loggedUser = loginOrRegisterSwitch(users);
 
      if ( UserService.isAdmin(loggedUser) ) {
-         adminMenuSwitch(movies);
-     } else {
+         adminMenuSwitch(movies, reviews);
+     } else if(UserService.isGuest(loggedUser)) {
+         guestMenuSwitch(movies, reviews);
+     }else {
          userMenuSwitch(movies, users, reviews, loggedUser);
      }
+
  }
 }

@@ -1,12 +1,14 @@
 package com.company.service;
 
 import com.company.Movie;
+import com.company.Review;
 
 import java.util.ArrayList;
 import java.util.List;
 
 import static com.company.IOUtils.readIntFromUser;
 import static com.company.IOUtils.readStringFromUser;
+import static com.company.service.ReviewService.removeReviewWhenRemovingMovie;
 
 public class MovieService {
 
@@ -45,13 +47,14 @@ public class MovieService {
         return movies.removeIf(movie -> (movie.getId()) == id);
     }
 
-    public static void moviesRemoveByID(List<Movie> movies) {
+    public static void moviesRemoveByID(List<Movie> movies, List<Review> reviews) {
         int idFromInput = readIntFromUser("ID of the movie to be removed [\"0\" to cancel]");
         try {
             if (idFromInput > 0) {
                 Movie movieWithGivenId = getMovieWithGivenId(movies, idFromInput);
                 movies.remove(movieWithGivenId);
                 System.out.println("movie removed");
+                removeReviewWhenRemovingMovie(reviews,idFromInput);
             }
         } catch (Exception e) {
             System.out.println(e.getMessage());
@@ -63,7 +66,6 @@ public class MovieService {
                 .filter(movie -> movie.getId() == idFromInput)
                 .findFirst()
                 .orElseThrow();
-        System.out.println(movieWithGivenId);
         return movieWithGivenId;
     }
 

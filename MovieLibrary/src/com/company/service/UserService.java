@@ -26,6 +26,10 @@ public class UserService {
 
         return getRole(user).equals(UserRole.ADMIN);
     }
+    public static boolean  isGuest(User user) {
+
+        return getRole(user).equals(UserRole.GUEST);
+    }
 
     public static User loginOrRegisterSwitch(List<User> users) {
             User user;
@@ -50,6 +54,9 @@ public class UserService {
                             System.out.println(e.getMessage());
                         }
                         break;
+                    case 3:
+                        user = new User(0,"guest","guest");
+                        return user;
                     case 9:
                         break;
                     default:

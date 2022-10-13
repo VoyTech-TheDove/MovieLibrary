@@ -1,8 +1,13 @@
 package com.company;
 
 import java.io.Serializable;
+import java.util.List;
+
+import static com.company.service.MovieService.getMovieWithGivenId;
 
 public class Review implements Serializable {
+
+    private static final long serialVersionUID =-2856070926308430475l;
 
     private int id;
     private double grade;
@@ -14,6 +19,14 @@ public class Review implements Serializable {
         this.grade = grade;
         this.userLogin = userLogin;
         this.reviewTxt = reviewTxt;
+    }
+
+    public String toString(List<Movie> movies) {
+        return "Review of " +
+                getMovieWithGivenId(movies,id).getTitle()+
+                " by " + userLogin +
+                "\ngrade = " + grade +
+                "\n" + reviewTxt;
     }
 
     public void setId(int id) {
@@ -53,4 +66,5 @@ public class Review implements Serializable {
     public String getReviewTxt() {
         return reviewTxt;
     }
+
 }
