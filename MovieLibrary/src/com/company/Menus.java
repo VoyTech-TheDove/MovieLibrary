@@ -1,37 +1,30 @@
 package com.company;
 
+import com.company.service.MovieService;
+import com.company.service.ReviewService;
+
 import java.io.IOException;
 import java.util.List;
 
-
-import static com.company.FileUtils.csvWriter;
-import static com.company.FileUtils.saveProgress;
-import static com.company.IOUtils.readIntFromUser;
-import static com.company.Utils.*;
-import static com.company.service.MovieService.*;
-import static com.company.service.ReviewService.*;
-
 public class Menus {
-
-
-    public static void userMenuSwitch(List<Movie> movies, List<User> users, List<Review> reviews, User user) throws IOException {
+    public static void userMenuSwitch(List<Movie> movies, List<Review> reviews, User user) throws IOException {
         int x = 0;
         while (x != 9) {
-            showUserMenu();
-            x = readIntFromUser("option");
+            GuiUtils.showUserMenu();
+            x = IOUtils.readIntFromUser("option");
             switch (x) {
                 case 1:
-                    detailedListMovies(movies);
+                    MovieService.detailedListMovies(movies);
                     break;
                 case 2:
-                    reviewMoviesByID(reviews, movies, users, user);
-                    saveProgress(reviews, "reviews.dat");
+                    ReviewService.reviewMoviesByID(reviews, movies, user);
+                    FileUtils.saveProgress(reviews, "reviews.dat");
                     break;
                 case 3:
-                    showListOfReviews(reviews,movies);
+                    ReviewService.showListOfReviews(reviews,movies);
                     break;
                 case 4:
-                    showSortedListOfReviews(reviews,movies);
+                    ReviewService.showSortedListOfReviews(reviews,movies);
                 case 9:
                     break;
                 default:
@@ -42,17 +35,17 @@ public class Menus {
     public static void guestMenuSwitch(List<Movie> movies, List<Review> reviews) throws IOException {
         int x;
         do {
-            showGuestMenu();
-            x = readIntFromUser("option");
+            GuiUtils.showGuestMenu();
+            x = IOUtils.readIntFromUser("option");
             switch (x) {
                 case 1:
-                    detailedListMovies(movies);
+                    MovieService.detailedListMovies(movies);
                     break;
                 case 3:
-                    showListOfReviews(reviews,movies);
+                    ReviewService.showListOfReviews(reviews,movies);
                     break;
                 case 4:
-                    showSortedListOfReviews(reviews,movies);
+                    ReviewService.showSortedListOfReviews(reviews,movies);
                 case 9:
                     break;
                 default:
@@ -60,18 +53,15 @@ public class Menus {
             }
         } while (x != 9);
     }
-
-
     public static void adminMenuSwitch(List<Movie> movies, List<Review>reviews) throws IOException {
-
         int x = 0;
         while(x!=9){
-            showAdminMenu();
-            x = readIntFromUser("option:");
+            GuiUtils.showAdminMenu();
+            x = IOUtils.readIntFromUser("option:");
             switch (x) {
                 case 1:
                     try {
-                        addMovie(movies);
+                        MovieService.addMovie(movies);
                     } catch (Exception e) {
                         System.out.println(e.getMessage());
                     }
@@ -81,16 +71,16 @@ public class Menus {
                     System.out.println(movies.size());
                     break;
                 case 3:
-                    detailedListMovies(movies);
+                    MovieService.detailedListMovies(movies);
                     break;
                 case 5:
-                    moviesRemoveByID(movies,reviews);
+                    MovieService.moviesRemoveByID(movies,reviews);
                     break;
                 case 6:
-                    showList(movies);
+                    MovieService.showList(movies);
                     break;
                 case 7:
-                    csvWriter(movies);
+                    FileUtils.writeMoviesIntoCSV(movies);
                     break;
                 case 9:
                     break;

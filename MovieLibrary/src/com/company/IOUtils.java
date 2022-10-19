@@ -3,12 +3,10 @@ package com.company;
 import java.util.Scanner;
 
 public class IOUtils {
-
     private static final Scanner SCANNER = new Scanner(System.in);
 
-
         public static int readIntFromUser(String nameOfInt) {
-        boolean flag;
+        boolean inputReceivedSuccessfully;
         String line;
         int n = 0;
         do{
@@ -16,33 +14,31 @@ public class IOUtils {
             line = SCANNER.nextLine();
             try{
                 n=Integer.parseInt(line);
-                flag = false;
+                inputReceivedSuccessfully = false;
             } catch (NumberFormatException e) {
                 System.out.println("Enter only Integer Value");
-                flag = true;
+                inputReceivedSuccessfully = true;
                 SCANNER.reset();
             }
-        }while(flag);
+        }while(inputReceivedSuccessfully);
         System.out.println("you have entered: "+line+ " for "+nameOfInt);
         return n;
-
     }
+
     public static String readStringFromUser(String nameOfString) {
-        boolean flag;
+        boolean inputReceivedSuccessfully;
         String line = null;
         do{
             System.out.println("Please enter "+nameOfString);
             if(SCANNER.hasNextLine()) {
                 line = SCANNER.nextLine();
-                flag = false;
+                inputReceivedSuccessfully = false;
             } else{
                 System.out.println("Write something...");
-                flag = true;
+                inputReceivedSuccessfully = true;
             }
-        }while(flag);
+        }while(inputReceivedSuccessfully);
         System.out.println("you have entered: "+line);
         return line;
-
     }
-
 }
