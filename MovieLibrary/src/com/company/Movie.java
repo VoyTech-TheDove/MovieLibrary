@@ -9,7 +9,7 @@ public class Movie implements Serializable {
     private static int nextID = 0;
 
     public Movie(String title, int date) {
-        this.id =nextID++;
+        this.id = nextID++;
         this.title = title;
         this.date = date;
     }
@@ -18,13 +18,15 @@ public class Movie implements Serializable {
         this.id = id;
         this.title = title;
         this.date = date;
-        if (id>=nextID){
-            nextID+=id;
+        if (id >= nextID) {
+            nextID += id;
         }
     }
-public void getDetails (){
-    System.out.println(this.title +" ["+this.date+"]");
-}
+
+    public void getDetails() {
+        System.out.println(this.title + " [" + this.date + "]");
+    }
+
     @Override
     public String toString() {
         return "Movie{" +
@@ -37,7 +39,6 @@ public void getDetails (){
     public int getId() {
         return id;
     }
-
 
     public String getTitle() {
         return title;

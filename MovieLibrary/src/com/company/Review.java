@@ -1,13 +1,13 @@
 package com.company;
 
+import com.company.service.MovieService;
+
 import java.io.Serializable;
 import java.util.List;
 
-import static com.company.service.MovieService.getMovieWithGivenId;
-
 public class Review implements Serializable {
 
-    private static final long serialVersionUID =-2856070926308430475l;
+    private static final long serialVersionUID = -2856070926308430475l;
 
     private int id;
     private double grade;
@@ -23,7 +23,7 @@ public class Review implements Serializable {
 
     public String toString(List<Movie> movies) {
         return "Review of " +
-                getMovieWithGivenId(movies,id).getTitle()+
+                MovieService.getMovieWithGivenId(movies, id).getTitle() +
                 " by " + userLogin +
                 "\ngrade = " + grade +
                 "\n" + reviewTxt;
@@ -34,10 +34,9 @@ public class Review implements Serializable {
     }
 
     public void setGrade(double grade) {
-        if (grade >0 && grade <=5){
+        if (grade > 0 && grade <= 5) {
             this.grade = grade;
-        }
-        else {
+        } else {
             this.grade = 5;
             System.out.println("grade must be 1-5 -grade set to 5");
         }
@@ -66,5 +65,4 @@ public class Review implements Serializable {
     public String getReviewTxt() {
         return reviewTxt;
     }
-
 }

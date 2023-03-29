@@ -3,8 +3,6 @@ package com.company;
 import java.io.Serializable;
 
 public class User implements Serializable {
-
-
     private int id;
     private String login;
     private String password;
@@ -16,6 +14,7 @@ public class User implements Serializable {
         this.login = login;
         this.password = password;
     }
+
     public User(int id, String login, String password) {
         this.id = id;
         this.login = login;
@@ -24,7 +23,6 @@ public class User implements Serializable {
             nextID += id;
         }
     }
-
 
     @Override
     public String toString() {
